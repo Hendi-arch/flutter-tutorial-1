@@ -23,7 +23,7 @@ pipeline {
     }
     
     // When the Pipeline has finished executing, then clean-up project
-    posts {
+    post {
         always {
             sh './jenkins/scripts/flutter-clean.sh'
         }
