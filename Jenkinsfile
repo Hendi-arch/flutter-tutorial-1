@@ -8,20 +8,21 @@ pipeline {
     // Application stages
     stages {
         stage('Build') {
-            steps {
-                sh 'flutter build apk --release && flutter build appbundle --release'
+            withEnv(['PATH=/Users/xulu/Projects/flutter_sdk/flutter/bin:/Users/xulu/Library/Android/sdk:/Applications/Xcode.app/Contents/Developer']) {
+                /* it hangs and fails later with "process apparently never started" */
+                sh ('flutter build apk --debug')
             }
         }
         stage('Test') {
-            steps {
-                sh 'flutter test'
+            withEnv(['PATH=/Users/xulu/Projects/flutter_sdk/flutter/bin:/Users/xulu/Library/Android/sdk:/Applications/Xcode.app/Contents/Developer']) {
+                /* it hangs and fails later with "process apparently never started" */
+                sh ('flutter test')
             }
         }
         stage('Running') {
-            steps {
-                sh 'flutter run --web-allow-expose-url --web-port=5555'
-                input message: 'Finished using the web site? (Click "Proceed" to continue)'
-                sh 'killall -9 dart'
+            withEnv(['PATH=/Users/xulu/Projects/flutter_sdk/flutter/bin:/Users/xulu/Library/Android/sdk:/Applications/Xcode.app/Contents/Developer']) {
+                /* it hangs and fails later with "process apparently never started" */
+                sh ('flutter run --web-allow-expose-url --web-port=5555')
             }
         }
     }
