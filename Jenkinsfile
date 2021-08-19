@@ -1,5 +1,5 @@
 pipeline {
-    agent { label 'Flutter x Jenkins' }
+    agent { label 'FlutterXJenkins' }
 
     // Application stages
     stages {
