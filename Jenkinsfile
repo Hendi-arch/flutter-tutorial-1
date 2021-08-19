@@ -5,19 +5,23 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh './jenkins/scripts/flutter-build.sh'
+                sh 'Building the application.........'
+                sh 'flutter build apk --release && flutter build appbundle --release'
             }
         }
         stage('Test') {
             steps {
-                sh './jenkins/scripts/flutter-test.sh'
+                sh 'Application test running............'
+                sh 'flutter test'
             }
         }
         stage('Running') {
             steps {
-                sh './jenkins/scripts/flutter-run.sh'
+                sh 'Now, you can test access the app, by accessing http://localhost:5555'
+                sh 'flutter run --web-allow-expose-url --web-port=5555'
                 input message: 'Finished using the web site? (Click "Proceed" to continue)'
-                sh './jenkins/scripts/flutter-kill.sh'
+                sh 'Finish and stop.......'
+                sh 'killall -9 dart'
             }
         }
     }
@@ -25,7 +29,8 @@ pipeline {
     // When the Pipeline has finished executing, then clean-up project
     post {
         always {
-            sh './jenkins/scripts/flutter-clean.sh'
+            sh 'Clean up project'
+            sh 'flutter clean && flutter pub get'
         }
     }
 }
