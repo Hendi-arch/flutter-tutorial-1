@@ -9,17 +9,17 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh ('flutter build apk --debug')
+                sh ('./jenkins/scripts/flutter-build.sh')
             }
         }
         stage('Test') {
             steps {
-                sh ('flutter test')
+                sh ('./jenkins/scripts/flutter-test.sh')
             }
         }
         stage('Running') {
             steps {
-                sh ('flutter run --web-allow-expose-url --web-port=5555')
+                sh ('./jenkins/scripts/flutter-run.sh')
             }
         }
     }
@@ -27,7 +27,7 @@ pipeline {
     // When the Pipeline has finished executing, then clean-up project
     post {
         always {
-            sh 'flutter clean && flutter pub get'
+            sh './jenkins/scripts/flutter-clean.sh'
         }
     }
 }
