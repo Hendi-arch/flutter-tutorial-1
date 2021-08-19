@@ -8,24 +8,18 @@ pipeline {
     // Application stages
     stages {
         stage('Build') {
-            withEnv(['PATH=/Users/xulu/Projects/flutter_sdk/flutter/bin:/Users/xulu/Library/Android/sdk:/Applications/Xcode.app/Contents/Developer']) {
-                steps {
-                    sh ('flutter build apk --debug')
-                }
+            steps {
+                sh ('flutter build apk --debug')
             }
         }
         stage('Test') {
-            withEnv(['PATH=/Users/xulu/Projects/flutter_sdk/flutter/bin:/Users/xulu/Library/Android/sdk:/Applications/Xcode.app/Contents/Developer']) {
-                steps {
-                    sh ('flutter test')
-                }
+            steps {
+                sh ('flutter test')
             }
         }
         stage('Running') {
-            withEnv(['PATH=/Users/xulu/Projects/flutter_sdk/flutter/bin:/Users/xulu/Library/Android/sdk:/Applications/Xcode.app/Contents/Developer']) {
-                steps {
-                    sh ('flutter run --web-allow-expose-url --web-port=5555')
-                }
+            steps {
+                sh ('flutter run --web-allow-expose-url --web-port=5555')
             }
         }
     }
